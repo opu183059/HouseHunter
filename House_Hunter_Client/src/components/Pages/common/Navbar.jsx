@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Authcontext } from "../../Provider/Authprovider";
 
 const Navbar = () => {
+  const { user } = useContext(Authcontext);
+  console.log(user);
   return (
     <div>
       <div className="navbar bg-base-100 fixed z-50">
@@ -30,16 +34,9 @@ const Navbar = () => {
                 <Link to={"/"}>Home</Link>
               </li>
               <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
+                <Link to={"/registration"}>Register</Link>
               </li>
+
               <li>
                 <Link to={"/dashboard"}>Dashboard</Link>
               </li>
@@ -59,18 +56,8 @@ const Navbar = () => {
             <li>
               <Link to={"/"}>Home</Link>
             </li>
-            <li tabIndex={0}>
-              <details>
-                <summary>Parent</summary>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </details>
+            <li>
+              <Link to={"/registration"}>Register</Link>
             </li>
             <li>
               <Link to={"/dashboard"}>Dashboard</Link>
@@ -78,9 +65,24 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <button className="px-3 py-1 bg-sky-500 hover:bg-sky-700 transition-all duration-300 rounded-md uppercase text-gray-50 ">
-            Login
-          </button>
+          {user ? (
+            <>
+              <h1>{user?.name}</h1>
+              <Link
+                to={"/login"}
+                className="px-3 py-1 bg-sky-500 hover:bg-sky-700 transition-all duration-300 rounded-md uppercase text-gray-50 "
+              >
+                Log out
+              </Link>
+            </>
+          ) : (
+            <Link
+              to={"/login"}
+              className="px-3 py-1 bg-sky-500 hover:bg-sky-700 transition-all duration-300 rounded-md uppercase text-gray-50 "
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>

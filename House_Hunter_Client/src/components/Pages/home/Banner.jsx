@@ -24,9 +24,12 @@ const Banner = () => {
               <p className="py-6 text-sky-900 font-medium">
                 Discover a place you will love to live
               </p>
-              <button className="px-4 py-2 bg-sky-500 hover:bg-sky-700 transition-all duration-300 rounded-md uppercase font-medium text-gray-50 text-lg">
+              <a
+                href="#houses"
+                className="px-4 py-2 bg-sky-500 hover:bg-sky-700 transition-all duration-300 rounded-md uppercase font-medium text-gray-50 text-lg"
+              >
                 Explore Houses
-              </button>
+              </a>
             </div>
           </div>
         </div>
