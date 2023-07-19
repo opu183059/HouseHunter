@@ -9,6 +9,8 @@ import Login from "./components/Pages/login_registration/Login.jsx";
 import MainDashboard from "./components/Pages/dashboard/MainDashboard.jsx";
 import Authprovider from "./components/Provider/Authprovider.jsx";
 import AddHouse from "./components/Pages/dashboard/houseOwner/AddHouse.jsx";
+import MyHouse from "./components/Pages/dashboard/houseOwner/MyHouse.jsx";
+import UpdateHouse from "./components/Pages/dashboard/houseOwner/UpdateHouse.jsx";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +37,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard/ownerHouses",
-        element: <h1>My house</h1>,
+        element: <MyHouse></MyHouse>,
       },
       {
         path: "/dashboard/ownerBookings",
@@ -44,6 +46,12 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/addHouse",
         element: <AddHouse></AddHouse>,
+      },
+      {
+        path: "/dashboard/ownerHouses/updateHouse/:id",
+        element: <UpdateHouse></UpdateHouse>,
+        loader: ({ params }) =>
+          fetch(`https://localhost:5000/houseInformation/${params.id}`),
       },
     ],
   },

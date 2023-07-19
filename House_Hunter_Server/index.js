@@ -70,13 +70,35 @@ async function run() {
       }
     });
 
-    // Add rooms
+    // Owners Add rooms
     app.post("/addRoom", async (req, res) => {
       const body = req.body;
       body.createdAt = new Date();
-      // console.log(body);
+
       const result = await RoomData.insertOne(body);
-      console.log(result);
+
+      res.json(result);
+    });
+    // Owner Houses
+    app.get("/myHouses/:email", async (req, res) => {
+      const result = await RoomData.find({ email: req.params.email })
+        .sort({ createdAt: -1 })
+        .toArray();
+      res.json(result);
+    });
+    // Get house info
+    app.get("/houseInformation/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await RoomData.findOne(query);
+      res.json(result);
+    });
+
+    // Delete House
+    app.delete("/houseDelete/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await RoomData.deleteOne(query);
       res.json(result);
     });
 
