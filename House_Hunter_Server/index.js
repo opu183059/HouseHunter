@@ -150,10 +150,10 @@ async function run() {
       res.json(result);
     });
     // Delete bookings
-    app.delete("/houseDelete/:id", async (req, res) => {
+    app.delete("/bookingDelete/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
-      const result = await RoomData.deleteOne(query);
+      const result = await BookingData.deleteOne(query);
       res.json(result);
     });
 
