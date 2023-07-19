@@ -1,24 +1,19 @@
 import { useEffect, useState } from "react";
 import HouseCard from "./HouseCard";
-import axios from "axios";
-// import axios from "axios";
-// import SearchBox from "./SearchBox";
-
 const SearchHouse = () => {
   const [houses, setHouses] = useState([]);
-  // const [seachText, setsearchText] = useState("");
   const [city, setCity] = useState("");
   const [bedroom, setBedroom] = useState("");
   const [bathroom, setBathroom] = useState("");
   const [roomsize, setRoomsize] = useState("");
   const [available, setAvailable] = useState("");
-  console.log(city, bedroom, bathroom, roomsize, available);
+
   useEffect(() => {
     fetch("https://house-hunter-server-rust.vercel.app/houses")
       .then((res) => res.json())
       .then((result) => {
         setHouses(result);
-        console.log(result);
+
         if (result.length == 0) {
           alert("nodata");
         }
@@ -32,7 +27,6 @@ const SearchHouse = () => {
       </h1>
 
       <div className="flex justify-center">
-        {/* <SearchBox></SearchBox> */}
         <div className="my-10">
           <div className="join">
             <select

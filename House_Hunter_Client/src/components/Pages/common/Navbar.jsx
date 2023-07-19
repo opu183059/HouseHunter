@@ -1,10 +1,15 @@
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Authcontext } from "../../Provider/Authprovider";
 
 const Navbar = () => {
   const { user, handleLogout } = useContext(Authcontext);
+  const navigate = useNavigate();
 
+  const logout = () => {
+    handleLogout();
+    navigate("/");
+  };
   return (
     <div>
       <div className="navbar bg-base-100 fixed z-50">
@@ -37,9 +42,11 @@ const Navbar = () => {
                 <Link to={"/registration"}>Register</Link>
               </li>
 
-              <li>
-                <Link to={"/dashboard"}>Dashboard</Link>
-              </li>
+              {user && (
+                <li>
+                  <Link to={"/dashboard"}>Dashboard</Link>
+                </li>
+              )}
             </ul>
           </div>
           <Link to="/" className="icon flex items-center">
@@ -75,16 +82,18 @@ const Navbar = () => {
               Register
             </NavLink>
 
-            <NavLink
-              to="/dashboard"
-              className={({ isActive }) =>
-                isActive
-                  ? " text-blue-700  font-bold block px-4 py-2 hover:bg-blue-600 hover:text-gray-50 transition-all duration-300 rounded-md"
-                  : "block px-4 py-2 text-gray-800  hover:text-gray-100 hover:bg-blue-600 transition-all duration-300 rounded-md"
-              }
-            >
-              Dashboard
-            </NavLink>
+            {user && (
+              <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                  isActive
+                    ? " text-blue-700  font-bold block px-4 py-2 hover:bg-blue-600 hover:text-gray-50 transition-all duration-300 rounded-md"
+                    : "block px-4 py-2 text-gray-800  hover:text-gray-100 hover:bg-blue-600 transition-all duration-300 rounded-md"
+                }
+              >
+                Dashboard
+              </NavLink>
+            )}
           </div>
         </div>
         <div className="navbar-end">
@@ -94,7 +103,7 @@ const Navbar = () => {
                 {user?.name}
               </h1>
               <button
-                onClick={handleLogout}
+                onClick={logout}
                 className="text-base font-normal px-3 py-1 bg-sky-500 hover:bg-sky-700 transition-all duration-300 rounded-md uppercase text-gray-50 "
               >
                 Log out

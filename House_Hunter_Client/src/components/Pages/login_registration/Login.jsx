@@ -1,12 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
 import Lottie from "lottie-react";
 import showAnimation from "../login_registration/animation/animation_lk7w5ouy.json";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
 import { Authcontext } from "../../Provider/Authprovider";
 
 const Login = () => {
+  const navigate = useNavigate();
   const { setUser } = useContext(Authcontext);
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -26,6 +27,7 @@ const Login = () => {
       console.log("Login successful");
       localStorage.setItem("userData", JSON.stringify(response.data));
       setUser(JSON.parse(localStorage.getItem("userData")));
+      navigate("/");
     } catch (error) {
       console.error("Error during login:", error.response.data.message);
     }
