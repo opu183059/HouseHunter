@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+
 import { createContext, useEffect, useState } from "react";
 
 export const Authcontext = createContext(null);
@@ -8,6 +9,15 @@ const Authprovider = ({ children }) => {
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("userData")));
   }, []);
+
+  // useEffect(() => {
+  //   axios.get(`https://house-hunter-server-eight.vercel.app/mybooking/${user?.email}`).then(
+  //     (res) => {
+  //       setBooking(res.data);
+  //     },
+  //     [user]
+  //   );
+  // });
 
   const handleLogout = () => {
     localStorage.removeItem("userData");

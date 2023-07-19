@@ -1,21 +1,42 @@
 /* eslint-disable react/prop-types */
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Authcontext } from "../../../Provider/Authprovider";
+import axios from "axios";
 
 const HouseCard = ({ house }) => {
+  const { user } = useContext(Authcontext);
+  const [bookings, setBookings] = useState([]);
   const {
     name,
     email,
     address,
-
     bathroom,
     bedroom,
     city,
     roomsize,
-
     rent,
     photoURL,
     _id,
   } = house || {};
+
+  useEffect(() => {
+    const getbookingsData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/mybookings/${user?.email}`
+        );
+        setBookings(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    getbookingsData();
+  }, [user]);
+
+  // console.log(bookings?.length);
+  // console.log(user?.role);
+  // houseOwner
 
   return (
     <div className="flex justify-center">
@@ -43,11 +64,13 @@ const HouseCard = ({ house }) => {
           <p>Rent: {rent} tk BDT</p>
 
           <div className="card-actions justify-end">
-            <Link
-              to={`/booking/${_id}`}
-              className="px-3 py-1 bg-sky-500 text-gray-50 rounded"
-            >
-              Book now
+            <Link to={`/booking/${_id}`}>
+              <button
+                disabled={user?.role === "houseOwner" || bookings?.length >= 2}
+                className="px-3 py-1 bg-sky-500 text-gray-50 rounded"
+              >
+                Book now
+              </button>
             </Link>
           </div>
         </div>

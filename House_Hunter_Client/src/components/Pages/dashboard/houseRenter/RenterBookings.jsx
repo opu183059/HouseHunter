@@ -5,12 +5,10 @@ import RenterHouseRow from "./RenterHouseRow";
 
 const RenterBookings = () => {
   const { user } = useContext(Authcontext);
-  // console.log(user);
   const email = user?.email;
   const [bookedHouseData, setBookedHouseData] = useState([]);
   useEffect(() => {
-    // Make the Axios call inside the useEffect hook to fetch data when the component mounts
-    const fetchOwnerHouseData = async () => {
+    const renterHouseData = async () => {
       try {
         const response = await axios.get(
           `http://localhost:5000/mybookings/${email}`
@@ -20,7 +18,7 @@ const RenterBookings = () => {
         console.error("Error fetching data:", error);
       }
     };
-    fetchOwnerHouseData();
+    renterHouseData();
   }, []);
   return (
     <div>
