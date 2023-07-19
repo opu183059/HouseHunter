@@ -27,6 +27,7 @@ async function run() {
     await client.connect();
 
     const UsersData = client.db("HouseHunter").collection("user");
+    const RoomData = client.db("HouseHunter").collection("rooms");
     // Register new user
     app.post("/users/:email", async (req, res) => {
       const email = req.params.email;
@@ -67,6 +68,16 @@ async function run() {
       } catch (err) {
         res.status(500).json({ error: err.message });
       }
+    });
+
+    // Add rooms
+    app.post("/addRoom", async (req, res) => {
+      const body = req.body;
+      body.createdAt = new Date();
+      // console.log(body);
+      const result = await RoomData.insertOne(body);
+      console.log(result);
+      res.json(result);
     });
 
     // Send a ping to confirm a successful connection

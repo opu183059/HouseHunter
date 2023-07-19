@@ -8,6 +8,7 @@ import Registration from "./components/Pages/login_registration/Registration.jsx
 import Login from "./components/Pages/login_registration/Login.jsx";
 import MainDashboard from "./components/Pages/dashboard/MainDashboard.jsx";
 import Authprovider from "./components/Provider/Authprovider.jsx";
+import AddHouse from "./components/Pages/dashboard/houseOwner/AddHouse.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,9 +27,23 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login></Login>,
       },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <MainDashboard></MainDashboard>,
+    children: [
       {
-        path: "/dashboard",
-        element: <MainDashboard></MainDashboard>,
+        path: "/dashboard/ownerHouses",
+        element: <h1>My house</h1>,
+      },
+      {
+        path: "/dashboard/ownerBookings",
+        element: <h1>My Bookings</h1>,
+      },
+      {
+        path: "/dashboard/addHouse",
+        element: <AddHouse></AddHouse>,
       },
     ],
   },

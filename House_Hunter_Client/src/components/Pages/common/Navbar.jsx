@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Authcontext } from "../../Provider/Authprovider";
 
 const Navbar = () => {
-  const { user } = useContext(Authcontext);
-  console.log(user);
+  const { user, handleLogout } = useContext(Authcontext);
+
   return (
     <div>
       <div className="navbar bg-base-100 fixed z-50">
@@ -42,7 +42,7 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <Link to={"/"} className="icon flex items-center">
+          <Link to="/" className="icon flex items-center">
             <img
               src="https://png.pngtree.com/element_our/png/20181214/real-estate-house-logo-graphic-design-template-vector-illustration-png_269519.jpg"
               alt=""
@@ -52,33 +52,58 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li>
-              <Link to={"/"}>Home</Link>
-            </li>
-            <li>
-              <Link to={"/registration"}>Register</Link>
-            </li>
-            <li>
-              <Link to={"/dashboard"}>Dashboard</Link>
-            </li>
-          </ul>
+          <div className="font-medium text-base flex">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-blue-700  font-bold block px-4 py-2 hover:bg-blue-600 hover:text-gray-50 transition-all duration-300 rounded-md"
+                  : "block px-4 py-2 text-gray-800  hover:text-gray-100 hover:bg-blue-600 transition-all duration-300 rounded-md"
+              }
+            >
+              Home
+            </NavLink>
+
+            <NavLink
+              to="/registration"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-blue-700  font-bold block px-4 py-2 hover:bg-blue-600 hover:text-gray-50 transition-all duration-300 rounded-md"
+                  : "block px-4 py-2 text-gray-800  hover:text-gray-100 hover:bg-blue-600 transition-all duration-300 rounded-md"
+              }
+            >
+              Register
+            </NavLink>
+
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-blue-700  font-bold block px-4 py-2 hover:bg-blue-600 hover:text-gray-50 transition-all duration-300 rounded-md"
+                  : "block px-4 py-2 text-gray-800  hover:text-gray-100 hover:bg-blue-600 transition-all duration-300 rounded-md"
+              }
+            >
+              Dashboard
+            </NavLink>
+          </div>
         </div>
         <div className="navbar-end">
-          {user ? (
+          {user?.name ? (
             <>
-              <h1>{user?.name}</h1>
-              <Link
-                to={"/login"}
-                className="px-3 py-1 bg-sky-500 hover:bg-sky-700 transition-all duration-300 rounded-md uppercase text-gray-50 "
+              <h1 className="mr-1 font-semibold text-base border-2 px-3 py-1 rounded-md">
+                {user?.name}
+              </h1>
+              <button
+                onClick={handleLogout}
+                className="text-base font-normal px-3 py-1 bg-sky-500 hover:bg-sky-700 transition-all duration-300 rounded-md uppercase text-gray-50 "
               >
                 Log out
-              </Link>
+              </button>
             </>
           ) : (
             <Link
               to={"/login"}
-              className="px-3 py-1 bg-sky-500 hover:bg-sky-700 transition-all duration-300 rounded-md uppercase text-gray-50 "
+              className="text-base font-normal px-3 py-1 bg-sky-500 hover:bg-sky-700 transition-all duration-300 rounded-md uppercase text-gray-50 "
             >
               Login
             </Link>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 import Lottie from "lottie-react";
 import showAnimation from "../login_registration/animation/animation_lk7w5h5n.json";
@@ -7,7 +8,7 @@ import { useContext } from "react";
 import { Authcontext } from "../../Provider/Authprovider";
 const Registration = () => {
   const { user } = useContext(Authcontext);
-  console.log(user);
+  // console.log(user);
   const handleRegistration = async (event) => {
     event.preventDefault();
     const form = event.target;

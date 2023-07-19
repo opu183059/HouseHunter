@@ -8,9 +8,15 @@ const Authprovider = ({ children }) => {
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("userData")));
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userData");
+    setUser({});
+  };
   const autherinfo = {
     user,
     setUser,
+    handleLogout,
   };
   return (
     <Authcontext.Provider value={autherinfo}>{children}</Authcontext.Provider>

@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
 import { Authcontext } from "../../Provider/Authprovider";
-const Login = () => {
-  // const { setUser } = useContext(Authcontext);
 
+const Login = () => {
+  const { setUser } = useContext(Authcontext);
   const handleLogin = async (event) => {
     event.preventDefault();
     const form = event.target;
@@ -22,6 +22,7 @@ const Login = () => {
       });
       console.log("Login successful");
       localStorage.setItem("userData", JSON.stringify(response.data));
+      setUser(JSON.parse(localStorage.getItem("userData")));
     } catch (error) {
       console.error("Error during login:", error.response.data.message);
     }
