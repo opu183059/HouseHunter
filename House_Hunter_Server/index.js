@@ -142,6 +142,20 @@ async function run() {
       const result = await BookingData.insertOne(body);
       res.json(result);
     });
+    // Renter Bookings
+    app.get("/mybookings/:email", async (req, res) => {
+      const result = await BookingData.find({ renteremail: req.params.email })
+        .sort({ createdAt: -1 })
+        .toArray();
+      res.json(result);
+    });
+    // Delete bookings
+    app.delete("/houseDelete/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await RoomData.deleteOne(query);
+      res.json(result);
+    });
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });

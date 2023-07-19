@@ -2,8 +2,7 @@ import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Authcontext } from "../../Provider/Authprovider";
 const Sidebar = () => {
-  const { user } = useContext(Authcontext);
-
+  const { user, handleLogout } = useContext(Authcontext);
   const [isActive, setActive] = useState("false");
   const handleToggle = () => {
     setActive(!isActive);
@@ -51,36 +50,55 @@ const Sidebar = () => {
           </div>
           <hr />
           <div>
-            <NavLink
-              to="/dashboard"
-              className={({ isActive }) =>
-                `flex items-center px-4 py-2 mt-5 hover:text-gray-50 transition-colors duration-300 transform  hover:bg-blue-800  rounded-lg ${
-                  isActive ? "bg-blue-800  text-white" : " "
-                }`
-              }
-            >
-              My Houses
-            </NavLink>
-            <NavLink
-              to="/dashboard/ownerBookings"
-              className={({ isActive }) =>
-                `flex items-center px-4 py-2 mt-5 hover:text-gray-50 transition-colors duration-300 transform  hover:bg-blue-800  rounded-lg ${
-                  isActive ? "bg-blue-800  text-white" : " "
-                }`
-              }
-            >
-              Bookings
-            </NavLink>
-            <NavLink
-              to="/dashboard/addHouse"
-              className={({ isActive }) =>
-                `flex items-center px-4 py-2 mt-5 hover:text-gray-50 transition-colors duration-300 transform  hover:bg-blue-800  rounded-lg ${
-                  isActive ? "bg-blue-800  text-white" : " "
-                }`
-              }
-            >
-              Add New House
-            </NavLink>
+            {user.role === "houseOwner" && (
+              <>
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) =>
+                    `flex items-center px-4 py-2 mt-5 hover:text-gray-50 transition-colors duration-300 transform  hover:bg-blue-800  rounded-lg ${
+                      isActive ? "bg-blue-800  text-white" : " "
+                    }`
+                  }
+                >
+                  My Houses
+                </NavLink>
+                <NavLink
+                  to="/dashboard/ownerBookings"
+                  className={({ isActive }) =>
+                    `flex items-center px-4 py-2 mt-5 hover:text-gray-50 transition-colors duration-300 transform  hover:bg-blue-800  rounded-lg ${
+                      isActive ? "bg-blue-800  text-white" : " "
+                    }`
+                  }
+                >
+                  Bookings
+                </NavLink>
+                <NavLink
+                  to="/dashboard/addHouse"
+                  className={({ isActive }) =>
+                    `flex items-center px-4 py-2 mt-5 hover:text-gray-50 transition-colors duration-300 transform  hover:bg-blue-800  rounded-lg ${
+                      isActive ? "bg-blue-800  text-white" : " "
+                    }`
+                  }
+                >
+                  Add New House
+                </NavLink>
+              </>
+            )}
+
+            {user.role === "houseRenter" && (
+              <>
+                <NavLink
+                  to="/dashboard/renterBookings"
+                  className={({ isActive }) =>
+                    `flex items-center px-4 py-2 mt-5 hover:text-gray-50 transition-colors duration-300 transform  hover:bg-blue-800  rounded-lg ${
+                      isActive ? "bg-blue-800  text-white" : " "
+                    }`
+                  }
+                >
+                  My Bookings
+                </NavLink>
+              </>
+            )}
           </div>
         </div>
         <div>
@@ -90,7 +108,10 @@ const Sidebar = () => {
           >
             <span className="mx-4 font-medium">Home</span>
           </Link>
-          <button className="flex w-full items-center px-4 py-2 mt-5 hover:bg-blue-800 hover:text-gray-50 rounded-lg transition-colors duration-300 transform ">
+          <button
+            onClick={handleLogout}
+            className="flex w-full items-center px-4 py-2 mt-5 hover:bg-blue-800 hover:text-gray-50 rounded-lg transition-colors duration-300 transform "
+          >
             <span className="mx-4 font-medium">Logout</span>
           </button>
         </div>

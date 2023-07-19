@@ -13,6 +13,7 @@ import AddHouse from "./components/Pages/dashboard/houseOwner/AddHouse.jsx";
 import MyHouse from "./components/Pages/dashboard/houseOwner/MyHouse.jsx";
 import UpdateHouse from "./components/Pages/dashboard/houseOwner/UpdateHouse.jsx";
 import Booking from "./components/Pages/Booking/Booking.jsx";
+import RenterBookings from "./components/Pages/dashboard/houseRenter/RenterBookings.jsx";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/ownerBookings",
         element: <h1>My Bookings</h1>,
+      },
+      {
+        path: "/dashboard/renterBookings",
+        element: <RenterBookings></RenterBookings>,
       },
       {
         path: "/dashboard/addHouse",
