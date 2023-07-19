@@ -13,7 +13,7 @@ const MyHouse = () => {
     const fetchOwnerHouseData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/myHouses/${email}`
+          `https://house-hunter-server-rust.vercel.app/myHouses/${email}`
         );
         setHouseData(response.data);
       } catch (error) {

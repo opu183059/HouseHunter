@@ -18,14 +18,17 @@ const Booking = () => {
     const mobile = form.mobile.value;
     // console.log(name, renteremail, mobile);
     try {
-      await axios.post(`http://localhost:5000/bookHouse`, {
-        name: name,
-        renteremail: renteremail,
-        mobile: mobile,
-        owneremail: HomeData?.email,
-        houseID: HomeData?._id,
-        homeData: HomeData,
-      });
+      await axios.post(
+        `https://house-hunter-server-rust.vercel.app/bookHouse`,
+        {
+          name: name,
+          renteremail: renteremail,
+          mobile: mobile,
+          owneremail: HomeData?.email,
+          houseID: HomeData?._id,
+          homeData: HomeData,
+        }
+      );
       alert("Booking successful!");
     } catch (error) {
       alert("Booking failed.");

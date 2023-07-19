@@ -13,7 +13,7 @@ const OwnerBookings = () => {
     const fetchOwnerHouseData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/ownerBookings/${email}`
+          `https://house-hunter-server-rust.vercel.app/ownerBookings/${email}`
         );
         setOwnerBooking(response.data);
       } catch (error) {

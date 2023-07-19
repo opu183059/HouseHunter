@@ -38,7 +38,7 @@ const AddHouse = () => {
       description,
     };
     // console.log(roomData);
-    fetch("http://localhost:5000/addRoom", {
+    fetch("https://house-hunter-server-rust.vercel.app/addRoom", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(roomData),

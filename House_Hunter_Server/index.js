@@ -24,11 +24,12 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
 
     const UsersData = client.db("HouseHunter").collection("user");
     const RoomData = client.db("HouseHunter").collection("rooms");
     const BookingData = client.db("HouseHunter").collection("bookings");
+
     // Register new user
     app.post("/users/:email", async (req, res) => {
       const email = req.params.email;

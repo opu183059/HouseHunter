@@ -27,7 +27,7 @@ const MyHouseRow = ({ houseDataInfo, houseData, setHouseData }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/houseDelete/${id}`, {
+        fetch(`https://house-hunter-server-rust.vercel.app/houseDelete/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

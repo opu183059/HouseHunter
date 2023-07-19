@@ -18,13 +18,16 @@ const Registration = () => {
     const mobile = form.mobile.value;
     const password = form.password.value;
     try {
-      await axios.post(`http://localhost:5000/users/${email}`, {
-        name: name,
-        email: email,
-        role: role,
-        mobile: mobile,
-        password: password,
-      });
+      await axios.post(
+        `https://house-hunter-server-rust.vercel.app/users/${email}`,
+        {
+          name: name,
+          email: email,
+          role: role,
+          mobile: mobile,
+          password: password,
+        }
+      );
       alert("Registration successful!");
     } catch (error) {
       alert("Registration failed.");

@@ -16,9 +16,12 @@ const OwnerBookingRow = ({ houseDataInfo, ownerBooking, setOwnerBooking }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/bookingDelete/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://house-hunter-server-rust.vercel.app/bookingDelete/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);

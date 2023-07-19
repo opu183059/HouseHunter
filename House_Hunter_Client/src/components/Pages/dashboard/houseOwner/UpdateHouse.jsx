@@ -56,7 +56,10 @@ const UpdateHouse = () => {
     // console.log(roomData);
 
     axios
-      .put(`http://localhost:5000/houseUpdate/${_id}`, roomData)
+      .put(
+        `https://house-hunter-server-rust.vercel.app/houseUpdate/${_id}`,
+        roomData
+      )
       .then((res) => {
         if (res.data.modifiedCount > 0) {
           Swal.fire({

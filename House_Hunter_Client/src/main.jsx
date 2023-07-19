@@ -41,7 +41,9 @@ const router = createBrowserRouter([
         path: "/booking/:id",
         element: <Booking></Booking>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/houseInformation/${params.id}`),
+          fetch(
+            `https://house-hunter-server-rust.vercel.app/houseInformation/${params.id}`
+          ),
       },
     ],
   },
@@ -69,7 +71,9 @@ const router = createBrowserRouter([
         path: "/dashboard/updateHouse/:id",
         element: <UpdateHouse></UpdateHouse>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/houseInformation/${params.id}`),
+          fetch(
+            `https://house-hunter-server-rust.vercel.app/houseInformation/${params.id}`
+          ),
       },
     ],
   },

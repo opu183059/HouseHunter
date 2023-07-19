@@ -1,43 +1,36 @@
 import { useEffect, useState } from "react";
 import HouseCard from "./HouseCard";
+import axios from "axios";
 // import axios from "axios";
 // import SearchBox from "./SearchBox";
 
 const SearchHouse = () => {
   const [houses, setHouses] = useState([]);
-
+  // const [seachText, setsearchText] = useState("");
   const [city, setCity] = useState("");
   const [bedroom, setBedroom] = useState("");
   const [bathroom, setBathroom] = useState("");
   const [roomsize, setRoomsize] = useState("");
   const [available, setAvailable] = useState("");
-  // console.log(city, bedroom, bathroom, roomsize, available);
+  console.log(city, bedroom, bathroom, roomsize, available);
   useEffect(() => {
-    fetch("http://localhost:5000/houses")
+    fetch("https://house-hunter-server-rust.vercel.app/houses")
       .then((res) => res.json())
       .then((result) => {
         setHouses(result);
-        // console.log(result);
+        console.log(result);
         if (result.length == 0) {
           alert("nodata");
         }
       });
   }, []);
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       `http://localhost:5000/houses?city=${city}&bedroom=${bedroom}&bathroom=${bathroom}&roomsize=${roomsize}&available=${available}`
-  //     )
-  //     .then((res) => {
-  //       setHouses(res.data.result);
-  //     });
-  // }, [city, bedroom, bathroom, roomsize, available]);
 
   return (
     <div id="houses" className="max-w-6xl mx-auto">
       <h1 className="text-center mt-10 text-5xl text-sky-950">
         Search Your Desired House
       </h1>
+
       <div className="flex justify-center">
         {/* <SearchBox></SearchBox> */}
         <div className="my-10">
@@ -104,10 +97,6 @@ const SearchHouse = () => {
               <option value="yes">yes</option>
               <option value="no">no</option>
             </select>
-
-            {/* <button className="btn join-item bg-sky-500 hover:bg-sky-700 text-gray-50">
-              Search
-            </button> */}
           </div>
         </div>
       </div>

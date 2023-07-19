@@ -24,7 +24,7 @@ const HouseCard = ({ house }) => {
     const getbookingsData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/mybookings/${user?.email}`
+          `https://house-hunter-server-rust.vercel.app/mybookings/${user?.email}`
         );
         setBookings(response.data);
       } catch (error) {

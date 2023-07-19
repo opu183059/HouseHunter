@@ -16,10 +16,13 @@ const Login = () => {
     console.log(email, password);
 
     try {
-      const response = await axios.post("http://localhost:5000/login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://house-hunter-server-rust.vercel.app/login",
+        {
+          email,
+          password,
+        }
+      );
       console.log("Login successful");
       localStorage.setItem("userData", JSON.stringify(response.data));
       setUser(JSON.parse(localStorage.getItem("userData")));
