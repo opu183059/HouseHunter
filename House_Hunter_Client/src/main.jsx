@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
@@ -29,6 +30,16 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login></Login>,
       },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/booking/:id",
+        element: <Login></Login>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/houseInformation/${params.id}`),
+      },
     ],
   },
   {
@@ -36,7 +47,7 @@ const router = createBrowserRouter([
     element: <MainDashboard></MainDashboard>,
     children: [
       {
-        path: "/dashboard/ownerHouses",
+        path: "/dashboard",
         element: <MyHouse></MyHouse>,
       },
       {
@@ -48,10 +59,10 @@ const router = createBrowserRouter([
         element: <AddHouse></AddHouse>,
       },
       {
-        path: "/dashboard/ownerHouses/updateHouse/:id",
+        path: "/dashboard/updateHouse/:id",
         element: <UpdateHouse></UpdateHouse>,
         loader: ({ params }) =>
-          fetch(`https://localhost:5000/houseInformation/${params.id}`),
+          fetch(`http://localhost:5000/houseInformation/${params.id}`),
       },
     ],
   },

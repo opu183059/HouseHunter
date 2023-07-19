@@ -52,7 +52,7 @@ const Sidebar = () => {
           <hr />
           <div>
             <NavLink
-              to="/dashboard/ownerHouses"
+              to="/dashboard"
               className={({ isActive }) =>
                 `flex items-center px-4 py-2 mt-5 hover:text-gray-50 transition-colors duration-300 transform  hover:bg-blue-800  rounded-lg ${
                   isActive ? "bg-blue-800  text-white" : " "

@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 // mongodb
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ljsyrma.mongodb.net/?retryWrites=true&w=majority`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -70,6 +70,12 @@ async function run() {
       }
     });
 
+    // Get houses
+    app.get("/houses", async (req, res) => {
+      const result = await RoomData.find({}).sort({ createdAt: -1 }).toArray();
+      res.json(result);
+    });
+
     // Owners Add rooms
     app.post("/addRoom", async (req, res) => {
       const body = req.body;
@@ -91,6 +97,32 @@ async function run() {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await RoomData.findOne(query);
+      res.json(result);
+    });
+
+    // Update house Info
+    app.put("/houseUpdate/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      // const option = { upsert: true };
+      const updatedHouse = req.body;
+      const updatedHouseinformation = {
+        $set: {
+          name: updatedHouse.name,
+          email: updatedHouse.email,
+          address: updatedHouse.address,
+          mobile: updatedHouse.mobile,
+          bathroom: updatedHouse.bathroom,
+          bedroom: updatedHouse.bedroom,
+          city: updatedHouse.city,
+          roomsize: updatedHouse.roomsize,
+          available: updatedHouse.available,
+          rent: updatedHouse.rent,
+          photoURL: updatedHouse.photoURL,
+          description: updatedHouse.description,
+        },
+      };
+      const result = await RoomData.updateOne(query, updatedHouseinformation);
       res.json(result);
     });
 

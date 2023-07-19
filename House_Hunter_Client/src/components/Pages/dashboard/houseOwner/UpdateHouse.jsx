@@ -1,11 +1,9 @@
-import { useContext } from "react";
-import { Authcontext } from "../../../Provider/Authprovider";
+import axios from "axios";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UpdateHouse = () => {
-  const { user } = useContext(Authcontext);
   const HomeData = useLoaderData();
-
   const {
     name,
     email,
@@ -19,21 +17,8 @@ const UpdateHouse = () => {
     rent,
     photoURL,
     description,
+    _id,
   } = HomeData || {};
-  console.log(
-    name,
-    email,
-    address,
-    mobile,
-    bathroom,
-    bedroom,
-    city,
-    roomsize,
-    available,
-    rent,
-    photoURL,
-    description
-  );
 
   const addToy = (event) => {
     event.preventDefault();
@@ -68,20 +53,19 @@ const UpdateHouse = () => {
       photoURL,
       description,
     };
-    console.log(roomData);
-    // fetch("http://localhost:5000/addRoom", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(roomData),
-    // })
-    //   .then((res) => res.json())
-    //   .then((result) => {
-    //     // console.log(result);
-    //     if (result.insertedId) {
-    //       alert("Data inserted");
-    //       form.reset();
-    //     }
-    //   });
+    // console.log(roomData);
+
+    axios
+      .put(`http://localhost:5000/houseUpdate/${_id}`, roomData)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Data Updated successfully",
+          });
+        }
+      });
   };
 
   return (
@@ -95,14 +79,14 @@ const UpdateHouse = () => {
         <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm">
           <div className="grid grid-cols-6 gap-4 col-span-full">
             <h2 className="text-xl text-blue-800 font-semibold col-span-full">
-              Add House
+              Update House
             </h2>
             <div className="col-span-full sm:col-span-3">
               <label htmlFor="firstname" className="text-sm">
                 Name
               </label>
               <input
-                required
+                defaultValue={name}
                 id="name"
                 name="name"
                 type="text"
@@ -113,14 +97,13 @@ const UpdateHouse = () => {
 
             <div className="col-span-full sm:col-span-3">
               <label htmlFor="sellerEmail" className="text-sm">
-                Email
+                Owner Email
               </label>
               <input
-                readOnly
+                defaultValue={email}
                 id="email"
                 name="email"
                 type="email"
-                defaultValue={user?.email}
                 className="w-full h-9 ps-3 rounded-md focus:ring focus:ring-opacity-75 focus:ring-blue-400 dark:border-gray-700 dark:text-gray-900"
               />
             </div>
@@ -129,7 +112,7 @@ const UpdateHouse = () => {
                 Address
               </label>
               <input
-                required
+                defaultValue={address}
                 id="address"
                 name="address"
                 type="text"
@@ -142,7 +125,7 @@ const UpdateHouse = () => {
                 Phone Number
               </label>
               <input
-                required
+                defaultValue={mobile}
                 id="mobile"
                 name="mobile"
                 type="number"
@@ -155,6 +138,7 @@ const UpdateHouse = () => {
                 City
               </label>
               <select
+                defaultValue={city}
                 name="city"
                 id="city"
                 className="w-full h-9 ps-3 rounded-md focus:ring focus:ring-opacity-75 focus:ring-blue-400 border-gray-700 text-gray-900"
@@ -172,6 +156,7 @@ const UpdateHouse = () => {
                 Bedroom
               </label>
               <select
+                defaultValue={bedroom}
                 name="bedroom"
                 id="bedroom"
                 className="w-full h-9 ps-3 rounded-md focus:ring focus:ring-opacity-75 focus:ring-blue-400 border-gray-700 text-gray-900"
@@ -186,6 +171,7 @@ const UpdateHouse = () => {
                 Bathroom
               </label>
               <select
+                defaultValue={bathroom}
                 name="bathroom"
                 id="bathroom"
                 className="w-full h-9 ps-3 rounded-md focus:ring focus:ring-opacity-75 focus:ring-blue-400 border-gray-700 text-gray-900"
@@ -200,6 +186,7 @@ const UpdateHouse = () => {
                 room size
               </label>
               <input
+                defaultValue={roomsize}
                 id="roomsize"
                 name="roomsize"
                 type="text"
@@ -212,6 +199,7 @@ const UpdateHouse = () => {
                 Available
               </label>
               <select
+                defaultValue={available}
                 name="available"
                 id="available"
                 className="w-full h-9 ps-3 rounded-md focus:ring focus:ring-opacity-75 focus:ring-blue-400 border-gray-700 text-gray-900"
@@ -225,6 +213,7 @@ const UpdateHouse = () => {
                 Rent per month
               </label>
               <input
+                defaultValue={rent}
                 id="rent"
                 name="rent"
                 type="number"
@@ -237,7 +226,7 @@ const UpdateHouse = () => {
                 Picture
               </label>
               <input
-                required
+                defaultValue={photoURL}
                 id="photoURL"
                 name="photoURL"
                 type="text"
@@ -250,7 +239,7 @@ const UpdateHouse = () => {
                 Description
               </label>
               <input
-                required
+                defaultValue={description}
                 id="description"
                 type="text"
                 name="description"
@@ -261,7 +250,7 @@ const UpdateHouse = () => {
             <div className="col-span-full w-full text-right mt-3">
               <input
                 type="submit"
-                value="Add House"
+                value="Update House"
                 className="py-2 cursor-pointer px-3 bg-blue-500 text-white rounded transition duration-300"
               />
             </div>

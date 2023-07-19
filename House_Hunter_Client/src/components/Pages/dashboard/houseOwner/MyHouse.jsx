@@ -21,7 +21,7 @@ const MyHouse = () => {
       }
     };
     fetchOwnerHouseData();
-  }, []);
+  }, [houseData]);
   return (
     <div>
       <table className="table md:ml-4 table-compact w-full shadow-lg">

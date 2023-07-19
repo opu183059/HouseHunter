@@ -27,7 +27,7 @@ const MyHouseRow = ({ houseDataInfo, houseData, setHouseData }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://localhost:5000/houseDelete/${id}`, {
+        fetch(`http://localhost:5000/houseDelete/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
