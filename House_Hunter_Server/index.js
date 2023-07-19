@@ -156,6 +156,13 @@ async function run() {
       const result = await BookingData.deleteOne(query);
       res.json(result);
     });
+    // Houser owner Bookings
+    app.get("/ownerBookings/:email", async (req, res) => {
+      const result = await BookingData.find({ owneremail: req.params.email })
+        .sort({ createdAt: -1 })
+        .toArray();
+      res.json(result);
+    });
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });

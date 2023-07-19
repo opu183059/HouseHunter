@@ -164,6 +164,8 @@ const UpdateHouse = () => {
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
               </select>
             </div>
             <div className="col-span-full sm:col-span-2">
@@ -179,20 +181,25 @@ const UpdateHouse = () => {
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
+                <option value="4">4</option>
               </select>
             </div>
             <div className="col-span-full sm:col-span-3">
-              <label htmlFor="roomsize" className="text-sm">
-                room size
+              <label htmlFor="bathroom" className="text-sm ">
+                Room size
               </label>
-              <input
-                defaultValue={roomsize}
-                id="roomsize"
+              <select
                 name="roomsize"
-                type="text"
-                placeholder="Room size"
-                className="w-full h-9 ps-3 rounded-md focus:ring focus:ring-opacity-75 focus:ring-blue-400 dark:border-gray-700 dark:text-gray-900"
-              />
+                id="roomsize"
+                className="w-full h-9 ps-3 rounded-md focus:ring focus:ring-opacity-75 focus:ring-blue-400 border-gray-700 text-gray-900"
+              >
+                <option value="100">100 Square feet</option>
+                <option value="200">200 Square feet</option>
+                <option value="300">300 Square feet</option>
+                <option value="300">400 Square feet</option>
+                <option value="300">500 Square feet</option>
+                <option value="300">600 Square feet</option>
+              </select>
             </div>
             <div className="col-span-full sm:col-span-3">
               <label htmlFor="available" className="text-sm ">

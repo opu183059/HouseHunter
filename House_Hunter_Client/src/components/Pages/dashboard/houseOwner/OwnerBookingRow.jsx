@@ -1,24 +1,9 @@
-/* eslint-disable react/prop-types */
-
 import Swal from "sweetalert2";
 
-const RenterHouseRow = ({
-  houseDataInfo,
-  bookedHouseData,
-  setBookedHouseData,
-}) => {
-  const {
-    address,
-    available,
-    bathroom,
-    bedroom,
-    city,
-    mobile,
-    name,
-    photoURL,
-    rent,
-    roomsize,
-  } = houseDataInfo.homeData || {};
+/* eslint-disable react/prop-types */
+const OwnerBookingRow = ({ houseDataInfo, ownerBooking, setOwnerBooking }) => {
+  const { name, renteremail, mobile } = houseDataInfo || {};
+  const { address, city, photoURL, rent } = houseDataInfo.homeData || {};
 
   const DeleteBookings = (id) => {
     Swal.fire({
@@ -40,10 +25,10 @@ const RenterHouseRow = ({
             if (data.deletedCount > 0) {
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
             }
-            const restData = bookedHouseData.filter(
+            const restData = ownerBooking.filter(
               (hdata) => hdata._id !== houseDataInfo._id
             );
-            setBookedHouseData(restData);
+            setOwnerBooking(restData);
           });
       }
     });
@@ -55,16 +40,13 @@ const RenterHouseRow = ({
         <img src={photoURL} alt="" className="w-20 rounded" />
       </td>
       <td>
-        Name: {name} <br />
+        Name: {houseDataInfo.homeData.name} <br />
         Address: {address} <br /> City: {city} <br /> Mobile: {mobile}
       </td>
-      <td>
-        Bedroom: {bedroom} <br /> Bathroom: {bathroom} <br /> Room size:{" "}
-        {roomsize}
-      </td>
       <td>{rent}</td>
-      <td>{available}</td>
-
+      <td>{name}</td>
+      <td>{renteremail}</td>
+      <td>{mobile}</td>
       <td className="space-x-1">
         <button
           onClick={() => DeleteBookings(houseDataInfo._id)}
@@ -77,4 +59,4 @@ const RenterHouseRow = ({
   );
 };
 
-export default RenterHouseRow;
+export default OwnerBookingRow;
