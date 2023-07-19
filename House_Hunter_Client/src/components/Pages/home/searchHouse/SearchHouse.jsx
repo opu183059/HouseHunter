@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import HouseCard from "./HouseCard";
-import axios from "axios";
+// import axios from "axios";
 // import SearchBox from "./SearchBox";
 
 const SearchHouse = () => {

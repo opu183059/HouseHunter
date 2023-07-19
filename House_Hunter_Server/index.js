@@ -28,6 +28,7 @@ async function run() {
 
     const UsersData = client.db("HouseHunter").collection("user");
     const RoomData = client.db("HouseHunter").collection("rooms");
+    const BookingData = client.db("HouseHunter").collection("bookings");
     // Register new user
     app.post("/users/:email", async (req, res) => {
       const email = req.params.email;
@@ -131,6 +132,14 @@ async function run() {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await RoomData.deleteOne(query);
+      res.json(result);
+    });
+
+    // Booking house
+    app.post("/bookHouse", async (req, res) => {
+      const body = req.body;
+      body.createdAt = new Date();
+      const result = await BookingData.insertOne(body);
       res.json(result);
     });
 

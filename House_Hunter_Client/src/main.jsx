@@ -12,6 +12,7 @@ import Authprovider from "./components/Provider/Authprovider.jsx";
 import AddHouse from "./components/Pages/dashboard/houseOwner/AddHouse.jsx";
 import MyHouse from "./components/Pages/dashboard/houseOwner/MyHouse.jsx";
 import UpdateHouse from "./components/Pages/dashboard/houseOwner/UpdateHouse.jsx";
+import Booking from "./components/Pages/Booking/Booking.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/booking/:id",
-        element: <Login></Login>,
+        element: <Booking></Booking>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/houseInformation/${params.id}`),
       },
